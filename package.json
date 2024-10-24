@@ -1,0 +1,132 @@
+{
+  "name": "related-file-view",
+  "displayName": "Related File View",
+  "description": "Automatically opens related files in a split editor view.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "relatedfileview.openRelatedFiles",
+        "title": "Open Related Files",
+        "category": "Related File View"
+      }
+    ],
+    "configuration": {
+      "title": "Related File View",
+      "properties": {
+        "relatedfileview.showInitialised": {
+          "order": 0,
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Determines wether or not to show a notification when the extension becomes active."
+        },
+        "relatedfileview.activationMode": {
+          "order": 1,
+          "type": "string",
+          "enum": [
+            "On Editor Change",
+            "Manual"
+          ],
+          "markdownEnumDescriptions": [
+            "Opens related files when you focus on a different document.",
+            "Opens related files when you run the *Open Related Files* command."
+          ],
+          "default": "On Editor Change",
+          "markdownDescription": "Determines when to open related files for a document."
+        },
+        "relatedfileview.searchMode": {
+          "order": 2,
+          "type": "string",
+          "enum": [
+            "Root",
+            "Parent",
+            "Sibling",
+            "Custom"
+          ],
+          "markdownEnumDescriptions": [
+            "Searches for related files from the **root** directory of the project.",
+            "Searches for related files from the **parent** directory of the primary file.",
+            "Searches for related files from the **same** directory of the primary file.",
+            "Searches for related files from the provided glob patterns in the `#relatedfileview.customSearchGlobs#`setting."
+          ],
+          "default": "Parent",
+          "markdownDescription": "Determines where the file search for related files should originate."
+        },
+        "relatedfileview.searchSubFolders": {
+          "order": 3,
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Determines wether or not to search subfolders for related files."
+        },
+        "relatedfileview.customSearchGlobs": {
+          "order": 4,
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/*"
+          ],
+          "markdownDescription": "Determines any custom globs (folder paths) to search.\n\nNOTE: Only applies when `#relatedfileview.searchMode#` is set to `Custom`."
+        },
+        "relatedfileview.includedFileExtensions": {
+          "order": 5,
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".*"
+          ],
+          "markdownDescription": "Determines which file extensions should be considered for opening in the related file view. \n\n**NOTE: Feature Currently *NOT* Implemented!**"
+        },
+        "relatedfileview.excludedFiles": {
+          "order": 6,
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Determines which files to exclude from opening in the related file view. \n\n**NOTE: Feature Currently *NOT* Implemented!**"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.8",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.94.0",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.11.1",
+    "typescript": "^5.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kye-gregory/related-file-view"
+  },
+  "license": "GPL-3.0-or-later"
+}
