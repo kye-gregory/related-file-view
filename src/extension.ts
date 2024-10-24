@@ -62,6 +62,15 @@ export function activate(context: vscode.ExtensionContext) {
             rf.maintainLockedState(e);
     });
     context.subscriptions.push(maintainLockedStateListener);
+
+    /*/
+    // USED FOR DEBUGGING
+    const tabGroupListenerDebug = vscode.window.tabGroups.onDidChangeTabGroups(rf.testTabGroupEvent);
+    context.subscriptions.push(tabGroupListenerDebug);
+
+    const tabListenerDebug = vscode.window.tabGroups.onDidChangeTabs(rf.testTabEvent);
+    context.subscriptions.push(tabListenerDebug);
+    /*/
 }
 
 

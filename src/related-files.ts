@@ -422,3 +422,15 @@ function isRelatedFile(uri : vscode.Uri): boolean {
     const fileName = path.parse(uri.fsPath).base;
 	return relatedFiles.has(fileName);
 }
+
+
+/*/
+// USED FOR DEBUGGING
+export function testTabGroupEvent(e : vscode.TabGroupChangeEvent) {
+    console.info("TabGroup Change Event: ", e);
+}
+
+export function testTabEvent(e : vscode.TabChangeEvent) {
+    console.info("Tab Change Event: ", e);
+}
+/*/
